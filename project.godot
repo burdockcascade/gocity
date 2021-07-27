@@ -1,0 +1,33 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "BuildCommand",
+"language": "GDScript",
+"path": "res://core/gui/BuildCommand.gd"
+} ]
+_global_script_class_icons={
+"BuildCommand": ""
+}
+
+[application]
+
+config/name="GoCity"
+run/main_scene="res://core/Main.tscn"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "codeandweb.texturepacker" )
+
+[rendering]
+
+vram_compression/import_etc=true
+vram_compression/import_etc2=false

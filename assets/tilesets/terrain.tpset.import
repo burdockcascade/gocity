@@ -1,0 +1,15 @@
+[remap]
+
+importer="codeandweb.texturepacker_import_tileset"
+type="Resource"
+path="res://.import/terrain.tpset-4cbc4d4d98c0a3cd8ed2e4287a650cc1.res"
+
+[deps]
+
+files=[ "terrain.png", "res://assets/tilesets/terrain.res" ]
+
+source_file="res://assets/tilesets/terrain.tpset"
+dest_files=[ "res://.import/terrain.tpset-4cbc4d4d98c0a3cd8ed2e4287a650cc1.res", "terrain.png", "res://assets/tilesets/terrain.res" ]
+
+[params]
+

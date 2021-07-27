@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/CityPlot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/airport/sprites/airport.png" type="Texture" id=2]
+
+[node name="Airport" groups=[
+"airport",
+"plot",
+"power consumer",
+"transport",
+] instance=ExtResource( 1 )]
+power_consumption = 500
+pollution = 200
+crime = 100
+monthly_cost = 500
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
