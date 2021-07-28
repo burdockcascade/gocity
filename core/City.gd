@@ -1,7 +1,6 @@
 extends Node2D
 
 onready var terrain = $Terrain
-onready var selector = $Selector
 onready var plots = $Plots
 
 ################################################################################

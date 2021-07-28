@@ -70,7 +70,6 @@ func _handle_mouse_button(event) -> void:
 			can_move = false
 
 		selected_tile = current_tile
-		command.tilebox = Rect2(selected_tile, Vector2.ZERO).abs()
 
 	else:
 
@@ -85,18 +84,30 @@ func _handle_mouse_move(event) -> void:
 
 	if button_pressed:
 
-		# calculate box in tilemap
-		command.tilebox = Rect2(selected_tile, (current_tile - selected_tile) + Vector2.ONE)
+		var start_tile = selected_tile
+		var end_tile = current_tile
 
 		match command.action:
-
+#
 			BuildCommand.ROAD, BuildCommand.RAIL, BuildCommand.WIRE:
-				if (abs(command.tilebox.size.x) > abs(command.tilebox.size.y)):
-					command.tilebox.size = Vector2(command.tilebox.size.x, 1)
-				else:
-					command.tilebox.size =  Vector2(1, command.tilebox.size.y)
 
-		command.tilebox = command.tilebox.abs()
+				# calculate box in tilemap
+				command.tilebox = Rect2(selected_tile, current_tile - selected_tile).abs()
+				command.tilebox.size += Vector2.ONE
+
+				if command.tilebox.size.x < command.tilebox.size.y:
+					start_tile = Vector2(selected_tile.x, command.tilebox.position.y)
+					end_tile = Vector2(selected_tile.x, command.tilebox.end.y - 1)
+				else:
+					start_tile = Vector2(command.tilebox.position.x, selected_tile.y)
+					end_tile = Vector2(command.tilebox.end.x - 1, selected_tile.y)
+
+			BuildCommand.DESTROY:
+				pass
+
+
+		command.tilebox = Rect2(start_tile, (end_tile - start_tile) + Vector2.ONE).abs()
+
 		var pos = map_to_world(command.tilebox.position)
 
 		command.worldbox = Rect2(pos, Vector2(command.tilebox.size.x * DEFAULT_BOX_DIMENSION.x, command.tilebox.size.y * DEFAULT_BOX_DIMENSION.y))
