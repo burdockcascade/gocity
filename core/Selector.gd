@@ -87,13 +87,14 @@ func _handle_mouse_move(event) -> void:
 		var start_tile = selected_tile
 		var end_tile = current_tile
 
-		match command.action:
-#
-			BuildCommand.ROAD, BuildCommand.RAIL, BuildCommand.WIRE:
+		# calculate box in tilemap
+		command.tilebox = Rect2(selected_tile, current_tile - selected_tile).abs()
+		command.tilebox.size += Vector2.ONE
 
-				# calculate box in tilemap
-				command.tilebox = Rect2(selected_tile, current_tile - selected_tile).abs()
-				command.tilebox.size += Vector2.ONE
+		match command.action:
+
+			# restrict selection to single column or row
+			BuildCommand.ROAD, BuildCommand.RAIL, BuildCommand.WIRE:
 
 				if command.tilebox.size.x < command.tilebox.size.y:
 					start_tile = Vector2(selected_tile.x, command.tilebox.position.y)
@@ -104,7 +105,6 @@ func _handle_mouse_move(event) -> void:
 
 			BuildCommand.DESTROY:
 				pass
-
 
 		command.tilebox = Rect2(start_tile, (end_tile - start_tile) + Vector2.ONE).abs()
 

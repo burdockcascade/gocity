@@ -51,7 +51,7 @@ script = ExtResource( 30 )
 [node name="City" type="Node2D" parent="."]
 script = ExtResource( 36 )
 
-[node name="Simulator" type="Timer" parent="City"]
+[node name="Clock" type="Timer" parent="City"]
 wait_time = 2.0
 autostart = true
 
@@ -61,7 +61,7 @@ cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 25 )
 
-[node name="Plots" type="Node" parent="City"]
+[node name="Plots" type="Node2D" parent="City"]
 script = ExtResource( 40 )
 
 [node name="Selector" type="TileMap" parent="City"]
@@ -88,16 +88,21 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 123.0
-margin_bottom = 341.0
+margin_bottom = 367.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CityName" type="Label" parent="GUI/Toolbar/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="GUI/Toolbar/VBoxContainer"]
 margin_right = 116.0
 margin_bottom = 14.0
+
+[node name="LinkButton" type="LinkButton" parent="GUI/Toolbar/VBoxContainer/CenterContainer"]
+margin_left = 25.0
+margin_right = 91.0
+margin_bottom = 14.0
 text = "City Name"
-align = 1
+underline = 1
 
 [node name="HSeparator" type="HSeparator" parent="GUI/Toolbar/VBoxContainer"]
 margin_top = 18.0
@@ -286,7 +291,29 @@ group = ExtResource( 34 )
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 24 )
 
-[connection signal="timeout" from="City/Simulator" to="City" method="_on_Simulator_timeout"]
+[node name="HSeparator3" type="HSeparator" parent="GUI/Toolbar/VBoxContainer"]
+margin_top = 338.0
+margin_right = 116.0
+margin_bottom = 342.0
+
+[node name="CenterContainer4" type="CenterContainer" parent="GUI/Toolbar/VBoxContainer"]
+margin_top = 346.0
+margin_right = 116.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/Toolbar/VBoxContainer/CenterContainer4"]
+margin_left = 22.0
+margin_right = 94.0
+margin_bottom = 14.0
+text = "$1,000,000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="timeout" from="City/Clock" to="City" method="_on_Simulator_timeout"]
 [connection signal="selected" from="City/Selector" to="City" method="_on_Selector_selected"]
 [connection signal="selected" from="GUI/Toolbar" to="City/Selector" method="_on_Toolbar_selected"]
 [connection signal="toggled" from="GUI/Toolbar/VBoxContainer/CenterContainer3/GridContainer/ResidentialBtn" to="GUI/Toolbar" method="_on_ResidentialBtn_toggled"]
